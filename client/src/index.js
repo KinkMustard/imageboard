@@ -19,13 +19,12 @@ import purple from "material-ui/colors/purple";
 import green from "material-ui/colors/green";
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-const endPoint = "http://192.168.1.97:5000";
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <CreateMessage />
-        <MessageDisplayer />
+        {/* <CreateMessage />
+        <MessageDisplayer /> */}
         <ColorController />
       </React.Fragment>
     );

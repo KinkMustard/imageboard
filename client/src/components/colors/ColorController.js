@@ -4,58 +4,21 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 import io from "socket.io-client";
-
+import _ from "lodash";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { withStyles, MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
-import purple from "material-ui/colors/purple";
-import green from "material-ui/colors/green";
+import colorFields from "./colorFields";
 
 const endPoint = "http://192.168.1.97:5000";
 
 const styles = theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  margin: {
+  button: {
     margin: theme.spacing.unit
   },
-  cssRoot: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
-    "&:hover": {
-      backgroundColor: purple[700]
-    }
-  },
-  bootstrapRoot: {
-    boxShadow: "none",
-    textTransform: "none",
-    borderRadius: 4,
-    fontSize: 16,
-    padding: "6px 12px",
-    border: "1px solid",
-    backgroundColor: "#007bff",
-    borderColor: "#007bff",
-    "&:hover": {
-      backgroundColor: "#0069d9",
-      borderColor: "#0062cc"
-    },
-    "&:active": {
-      boxShadow: "none",
-      backgroundColor: "#0062cc",
-      borderColor: "#005cbf"
-    },
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)"
-    }
-  }
-});
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
+  input: {
+    display: "none"
   }
 });
 
@@ -71,6 +34,10 @@ class ColorController extends React.Component {
   componentWillMount() {
     this.initSocket();
   }
+  componentWillUpdate() {
+    this.updateColor();
+  }
+
   initSocket = async () => {
     const socket = io(endPoint);
     socket.on("connect", () => {
@@ -79,31 +46,61 @@ class ColorController extends React.Component {
     await this.setState({ socket });
     await this.getColor();
   };
+  updateColor = color => {
+    const { socket } = this.state;
+    socket.on("change color", color => {
+      this.setState({ color });
+      console.log("updated color", color);
+    });
+  };
   getColor = async color => {
     const { socket } = this.state;
     socket.on("get color", color => {
-      console.log(color);
       this.setState({ color });
+      console.log("got color", color);
     });
   };
   setColor = async color => {
     const { socket } = this.state;
     await this.setState({ color });
-    console.log(this.state.color);
     socket.emit("change color", this.state.color);
+    console.log("set color", color);
   };
+  renderFields() {
+    const { classes } = this.props;
+    return _.map(colorFields, ({ color }) => {
+      return (
+        <Button
+          id={color}
+          key={color}
+          variant="raised"
+          color={"primary"}
+          className={classes.button}
+          onClick={() => this.setColor(color)}
+        >
+          {color}
+        </Button>
+      );
+    });
+  }
   render() {
     const { classes } = this.props;
 
     return (
       <React.Fragment>
-        <div style={{ backgroundColor: this.state.color }}>
-          <Button id="blue" variant="raised" color="primary" onClick={() => this.setColor("blue")}>
-            Blue
-          </Button>
-          <Button id="red" variant="raised" color="primary" onClick={() => this.setColor("red")}>
-            Red
-          </Button>
+        <div
+          style={{
+            backgroundColor: this.state.color,
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexFlow: "column"
+          }}
+        >
+          {this.renderFields()}
+          <p>{this.state.nice}</p>
         </div>
       </React.Fragment>
     );

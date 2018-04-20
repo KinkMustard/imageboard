@@ -36,7 +36,8 @@ io.on("connection", async (socket) => {
 
   socket.on("change color", async (color) => {
     console.log("Color Changed to: ", color);
-    io.sockets.emit("change color", color);
+    // io.sockets.emit("change color", color);
+    socket.broadcast.emit("change color", color);
     // const createColor = new ColorModel({
     //   currentColor: color
     // });
