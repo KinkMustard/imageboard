@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import moment from "moment";
 import Grow from "material-ui/transitions/Grow";
 import { Divider } from "material-ui";
-import axios from "./axios-instance";
+import axios from "axios";
 
 const styles = theme => ({
   root: {

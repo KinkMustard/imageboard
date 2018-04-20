@@ -1,8 +1,10 @@
 import React from "react";
-import Message from "./messages";
+import { connect } from "react-redux";
+import { fetchPosts } from "../../actions";
+import Message from "./Messages";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
-import axios from "./axios-instance";
+import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -29,8 +31,9 @@ class MessageDisplayer extends React.Component {
   }
 
   componentDidMount() {
-    this.refreshMessages();
-    setInterval(() => this.refreshMessages(), 500);
+    this.props.fetchPosts();
+    // this.refreshMessages();
+    // setInterval(() => this.refreshMessages(), 500);
   }
 
   refreshMessages() {
@@ -57,4 +60,8 @@ MessageDisplayer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MessageDisplayer);
+function mapStateToProps({ posts }) {
+  return { posts };
+}
+
+export default connect(mapStateToProps, { fetchPosts })(withStyles(styles)(MessageDisplayer));

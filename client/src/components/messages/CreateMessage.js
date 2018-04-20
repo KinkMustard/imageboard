@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
-import axios from "./axios-instance";
+import axios from "axios";
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -9,16 +9,16 @@ import Dialog, {
   DialogTitle
 } from "material-ui/Dialog";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+// import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
 import Delete from "@material-ui/icons/Delete";
-import FileUpload from "@material-ui/icons/FileUpload";
-import KeyboardVoice from "@material-ui/icons/KeyboardVoice";
+// import FileUpload from "@material-ui/icons/FileUpload";
+// import KeyboardVoice from "@material-ui/icons/KeyboardVoice";
 import Icon from "material-ui/Icon";
-import Save from "@material-ui/icons/Save";
+// import Save from "@material-ui/icons/Save";
 import Snackbar from "material-ui/Snackbar";
 import Slide from "material-ui/transitions/Slide";
-import MenuItem from "material-ui/Menu/MenuItem";
+// import MenuItem from "material-ui/Menu/MenuItem";
 
 function TransitionUp(props) {
   return <Slide direction="up" {...props} />;
@@ -183,10 +183,7 @@ class FormDialog extends React.Component {
             <Button onClick={this.handleClearAllButtonClose} color="primary">
               Cancel
             </Button>
-            <Button
-              onClick={this.handleClearAllButtonCloseYes}
-              color="secondary"
-            >
+            <Button onClick={this.handleClearAllButtonCloseYes} color="secondary">
               Confirm
             </Button>
           </DialogActions>
