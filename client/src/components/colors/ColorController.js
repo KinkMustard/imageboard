@@ -10,8 +10,12 @@ import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import colorFields from "./colorFields";
+import { GET_COLOR, CHANGE_COLOR, UPDATE_COLOR } from "../../Events";
 
-const endPoint = "http://192.168.1.97:5000";
+const endPoint =
+  process.env.NODE_ENV === "development"
+    ? "http://192.168.1.97:5000"
+    : "https://obscure-retreat-13940.herokuapp.com/";
 
 const styles = theme => ({
   button: {
@@ -34,36 +38,26 @@ class ColorController extends React.Component {
   componentWillMount() {
     this.initSocket();
   }
-  componentWillUpdate() {
-    this.updateColor();
-  }
 
-  initSocket = async () => {
+  initSocket = () => {
     const socket = io(endPoint);
     socket.on("connect", () => {
       console.log("connected");
     });
-    await this.setState({ socket });
-    await this.getColor();
-  };
-  updateColor = color => {
-    const { socket } = this.state;
-    socket.on("change color", color => {
-      this.setState({ color });
-      console.log("updated color", color);
-    });
-  };
-  getColor = async color => {
-    const { socket } = this.state;
-    socket.on("get color", color => {
+    socket.on(GET_COLOR, color => {
       this.setState({ color });
       console.log("got color", color);
     });
+    socket.on(UPDATE_COLOR, async color => {
+      console.log(color);
+      await this.setState({ color });
+      console.log("updated color", color);
+    });
+    this.setState({ socket });
   };
-  setColor = async color => {
+  setColor = color => {
     const { socket } = this.state;
-    await this.setState({ color });
-    socket.emit("change color", this.state.color);
+    socket.emit(CHANGE_COLOR, color);
     console.log("set color", color);
   };
   renderFields() {
