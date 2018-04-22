@@ -8,7 +8,6 @@ import io from "socket.io-client";
 import reducers from "./reducers";
 import CreateMessage from "./components/messages/CreateMessage";
 import MessageDisplayer from "./components/messages/MessageDisplayer";
-import ColorController from "./components/colors/ColorController";
 import registerServiceWorker from "./registerServiceWorker";
 
 import PropTypes from "prop-types";
@@ -18,14 +17,14 @@ import Button from "material-ui/Button";
 import purple from "material-ui/colors/purple";
 import green from "material-ui/colors/green";
 
+const endPoint = process.env.NODE_ENV === "development" ? "http://192.168.1.97:5000" : "/";
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* <CreateMessage />
-        <MessageDisplayer /> */}
-        <ColorController />
+        <CreateMessage />
+        <MessageDisplayer />
       </React.Fragment>
     );
   }

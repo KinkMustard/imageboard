@@ -8,4 +8,4 @@ const postSchema = new Schema({
   dateCreated: Date
 });
 
-mongoose.model("surveys", postSchema);
+mongoose.model("posts", postSchema);

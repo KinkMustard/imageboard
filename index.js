@@ -12,9 +12,6 @@ const keys = require("./config/keys");
 const SocketManager = require("./SocketManager");
 require("./models/User");
 require("./services/passport");
-require("./models/Color");
-
-const ColorModel = mongoose.model("colors");
 
 mongoose.connect(keys.mongoURI);
 

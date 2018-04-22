@@ -11,11 +11,7 @@ import Dialog, {
 import PropTypes from "prop-types";
 // import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
-// import Delete from "@material-ui/icons/Delete";
-// import FileUpload from "@material-ui/icons/FileUpload";
-// import KeyboardVoice from "@material-ui/icons/KeyboardVoice";
 import Icon from "material-ui/Icon";
-// import Save from "@material-ui/icons/Save";
 import Snackbar from "material-ui/Snackbar";
 import Slide from "material-ui/transitions/Slide";
 // import MenuItem from "material-ui/Menu/MenuItem";
