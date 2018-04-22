@@ -11,7 +11,7 @@ import Dialog, {
 import PropTypes from "prop-types";
 // import classNames from "classnames";
 import { withStyles } from "material-ui/styles";
-import Delete from "@material-ui/icons/Delete";
+// import Delete from "@material-ui/icons/Delete";
 // import FileUpload from "@material-ui/icons/FileUpload";
 // import KeyboardVoice from "@material-ui/icons/KeyboardVoice";
 import Icon from "material-ui/Icon";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "material-ui/Button";
-import Delete from "@material-ui/icons/Delete";
+// import Delete from "@material-ui/icons/Delete";
 import { withStyles } from "material-ui/styles";
 import ExpansionPanel, {
   ExpansionPanelDetails,
@@ -9,7 +9,7 @@ import ExpansionPanel, {
   ExpansionPanelActions
 } from "material-ui/ExpansionPanel";
 import Typography from "material-ui/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import moment from "moment";
 import Grow from "material-ui/transitions/Grow";
 import { Divider } from "material-ui";
