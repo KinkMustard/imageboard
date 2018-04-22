@@ -130,7 +130,7 @@ class FormDialog extends React.Component {
           color="secondary"
         >
           Clear All Messages
-          <Delete className={classes.rightIcon} />
+          {/* <Delete className={classes.rightIcon} /> */}
         </Button>
 
         <Dialog

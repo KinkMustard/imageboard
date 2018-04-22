@@ -59,7 +59,7 @@ class ControlledExpansionPanels extends React.Component {
         {...(growAnimation ? { timeout: 1000 } : {})}
       >
         <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary>
             <Typography className={classes.heading}>{this.props.title}</Typography>
             <Typography className={classes.secondaryHeading}>
               {moment(this.props.date).fromNow()}
@@ -77,7 +77,7 @@ class ControlledExpansionPanels extends React.Component {
               color="secondary"
             >
               Delete
-              <Delete className={classes.rightIcon} />
+              {/* <Delete className={classes.rightIcon} /> */}
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
